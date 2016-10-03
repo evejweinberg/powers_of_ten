@@ -2,20 +2,28 @@ var map;
 
 // Create a new blank array for all the listing markers.
 var markers = [];
+var mapZoom = 4;
 
 function initMap() {
   // Constructor creates a new map - only center and zoom are required.
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.717533, lng: -73.945360},
-    zoom: 24,
-    mapTypeId: google.maps.MapTypeId.SATELLITE,
-    mapTypeControl: false
+    zoom: mapZoom,
+    zoomControl: false,
+    disableDefaultUI: true,
+    mapTypeControl: false,
+    // scaleControl: false,
+    // streetViewControl: false,
+    mapTypeId: google.maps.MapTypeId.SATELLITE
+    // mapTypeControl: false
   });
+  // var bikeLayer = new google.maps.BicyclingLayer();
+        // bikeLayer.setMap(map);
 
   // These are the real estate listings that will be shown to the user.
   // Normally we'd have these in a database instead.
   var locations = [
-    {title: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
+    {title: 'HOME', location: {lat: 40.717533, lng: -73.945360}},
     {title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
     {title: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
     {title: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
@@ -44,8 +52,9 @@ function initMap() {
       populateInfoWindow(this, largeInfowindow);
     });
   }
-  document.getElementById('show-listings').addEventListener('click', showListings);
-  document.getElementById('hide-listings').addEventListener('click', hideListings);
+  // document.getElementById('show-listings').addEventListener('click', showListings);
+  // document.getElementById('hide-listings').addEventListener('click', hideListings);
+  setInterval(function(){mapZoom++;map.setZoom(mapZoom)},700)
 }
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -80,4 +89,22 @@ function hideListings() {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
+}
+
+
+// var point = markers[id].getPosition(); // Get marker position
+// map.setZoom(9); // Back to default zoom
+// map.panTo(point); // Pan map to that position
+// setTimeout("map.setZoom(14)",1000); // Zoom in after 1 sec
+
+function animateMapZoomTo(mapname, targetZoom) {
+  console.log('called zoom')
+  var currentZoom = 24
+    // var currentZoom = arguments[2] || mapname.getZoom();
+    if (currentZoom != targetZoom) {
+        google.maps.event.addListenerOnce(mapname, 'zoom_changed', function (event) {
+            animateMapZoomTo(mapname, targetZoom, currentZoom + (targetZoom > currentZoom ? 1 : -1));
+        });
+        setTimeout(function(){ mapname.setZoom(currentZoom) }, 80);
+    }
 }
