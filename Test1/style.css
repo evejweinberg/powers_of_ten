@@ -1,98 +1,146 @@
-html,
-body {
-  font-family: 'Fjalla One', sans-serif;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+html, body {
+    font-family: 'Fjalla One', sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
+
+
 /*article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block; }*/
 
 .container {
-  height: 100%;
-  position: relative;
+    height: 100%;
+    position: relative;
 }
 
-#house-div{
-  display: none;
+#house-div {
+    display: none;
 }
 
-#intro-1, #intro-2{
-  font-size: 30px;
-  width: 90%;
+#intro-1, #intro-2 {
+    font-size: 30px;
+    width: 90%;
 }
 
-#power{
-  /*position: relative;
+#power {
+    /*position: relative;
   padding:150px;*/
 }
 
-#titles{
-  text-shadow: 2px 3px 21px black;
-  z-index: 30;
-  font-size: 40px;
-  position: relative;
-  left: 50%;
-  top: 30%;
-  color: white;
-  /*width:200px;*/
-  text-transform: uppercase;
-  text-align: left;
+#titles {
+    text-shadow: 2px 3px 21px black;
+    z-index: 30;
+    font-size: 40px;
+    position: relative;
+    left: 50%;
+    top: 30%;
+    color: white;
+    /*width:200px;*/
+    text-transform: uppercase;
+    text-align: left;
 }
 
-#blank-box{
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+#bottom-stuff {
+    width: 100%;
+    height: 14px;
+    bottom: -183px;
+    position: fixed;
+    margin-left: 15px;
 }
 
-.box{
-  border: 2px white solid;
-  width:500px;
-  height:500px;
-  z-index: 100;
-  position: relative;
-  /*display: block;*/
-  margin: auto;
-  top:20%;
- /*margin-right: auto ;*/
-  /*left: 50%;*/
-  /*text-align: center ;*/
+.tl-module {
+    width: 9%;
+    height: 100%;
+    margin: -1px;
+    border: 2px white solid;
+    /* position: relative; */
+    display: inline-block;
+}
+
+.tl-inner-module {
+    background-color: white;
+    width: 0%;
+    position: relative;
+    height: 100%;
+}
+
+#begin-box {
+    margin-top: 166px;
+    display: none;
+    background-color: black;
+    color: white;
+    position: relative;
+    width: 71px;
+    text-align: center;
+    z-index: 30;
+    line-height: normal;
+    height: 12px;
+    padding: 14px;
+    margin-left: 43%;
+    border-radius: 5px;
+}
+
+#begin-box:hover {
+    background-color: #3d3d3d;
+}
+
+#blank-box {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.box {
+    border: 2px white solid;
+    width: 500px;
+    height: 500px;
+    z-index: 100;
+    position: relative;
+    /*display: block;*/
+    margin: auto;
+    top: 20%;
+    /*margin-right: auto ;*/
+    /*left: 50%;*/
+    /*text-align: center ;*/
 }
 
 input {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 h1 {
-  /*color: #525454;*/
-  /*font-size: 22px;*/
-  /*margin: 0 0 10px 0;
+    /*color: #525454;*/
+    /*font-size: 22px;*/
+    /*margin: 0 0 10px 0;
   text-align: center;*/
 }
 
-#hide-listings,
-#show-listings {
-  width: 48%;
+#hide-listings, #show-listings {
+    width: 48%;
 }
 
 #map {
-  bottom:0px;
-  height: 100%;
-  /*left: 362px;*/
-  width: 100%;
-  position: absolute;
-  right: 0px;
+    bottom: 0px;
+    height: 100%;
+    /*left: 362px;*/
+    width: 100%;
+    position: absolute;
+    right: 0px;
 }
 
 .options-box {
-  background: #fff;
-  border: 1px solid #999;
-  border-radius: 3px;
-  height: 100%;
-  line-height: 35px;
-  padding: 10px 10px 30px 10px;
-  text-align: left;
-  width: 340px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    height: 100%;
+    line-height: 35px;
+    padding: 10px 10px 30px 10px;
+    text-align: left;
+    width: 340px;
+}
+
+px;
+
 }

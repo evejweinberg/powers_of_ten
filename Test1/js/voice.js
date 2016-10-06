@@ -5,7 +5,7 @@ var scene1 = true
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  // createCanvas(windowWidth, windowHeight);
   // speaker = new p5.Speech("Agnes");
   speaker = new p5.Speech("Karen");
     // speaker = new p5.Speech("Moira");
@@ -16,7 +16,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  // background(0);
   // speaker.setVoice(12)
   // speaker.setLang('en-US');
   // if (scene1){

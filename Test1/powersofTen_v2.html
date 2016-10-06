@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 
 
 
-  <meta charset=utf-8 />
-  <title>POWERS OF TEN</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta charset=utf-8 />
+    <title>POWERS OF TEN</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="style.css">
-  <script src="lib/p5.min.js" type="text/javascript"></script>
-  <script src="lib/p5.dom.js" type="text/javascript"></script>
-  <script src="lib/p5.sound.js" type="text/javascript"></script>
-  <script src="lib/p5.speech.js"></script>
+    <script src="lib/p5.min.js" type="text/javascript"></script>
+    <script src="lib/p5.dom.js" type="text/javascript"></script>
+    <script src="lib/p5.sound.js" type="text/javascript"></script>
+    <script src="lib/p5.speech.js"></script>
+    <!-- Music from Jukedeck - create your own at http://jukedeck.com -->
 
-  <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
-  </style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 
 </head>
 
@@ -28,42 +39,92 @@
 <body>
 
 
-<!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+    <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+    <audio audio id="myTune"> <source src="images/bg.mp3"></audio>
+    <div id="blank-box">
+        <div class="box" id="box1">
+            <header id="titles">
+                <p id="power">POWERS OF TEN</p>
+                <p id="intro-1">An interactive experience dealing with the relative size of things in the Universe</p>
+                <p id="intro-2">And the effects of adding another zero</p>
 
-<div id="blank-box">
-  <div class="box" id="box1">
-  <header id="titles">
-    <p id="power">POWERS OF TEN</p>
-    <p id="intro-1">An interactive experience dealing with the relative size of things in the Universe</p>
-      <p id="intro-2">And the effects of adding another zero</p>
+            </header>
+            <div id="begin-box">BEGIN</div>
+        </div>
 
-  </header>
     </div>
-  </div>
-<div id='map'></div>
-<div class="container">
-  <div id='house-div'><img id="house" src="images/house.png"></img></div>
-</div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <div id='map'></div>
+    <div class="container">
 
-<!-- //or just use tween max and it includes all the css and ease pack -->
-  <script src="lib/uncompressed/TweenLite.js"></script>
-    <script src="lib/uncompressed/TimelineLite.js"></script>
-  <script src="lib/uncompressed/easing/EasePack.js"></script>
+        <div id='house-div'><img id="house" src="images/house.png"></img>
+        </div>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenLite.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
-<!-- <script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script> --> -->
+        <div id="bottom-stuff">
+            <div class="tl-module" id="tl-module-1">
+                <div class="tl-inner-module" id="tl-inner-1">
+                </div>
+            </div>
+
+            <div class="tl-module" id="tl-module-2">
+                <div class="tl-inner-module" id="tl-inner-2">
+                </div>
+            </div>
+
+            <div class="tl-module" id="tl-module-3">
+                <div class="tl-inner-module" id="tl-inner-3">
+                </div>
+            </div>
+
+            <div class="tl-module" id="tl-module-4">
+                <div class="tl-inner-module" id="tl-inner-4">
+                </div>
+            </div>
+            <div class="tl-module" id="tl-module-5">
+                <div class="tl-inner-module" id="tl-inner-5">
+                </div>
+            </div>
+            <div class="tl-module" id="tl-module-6">
+                <div class="tl-inner-module" id="tl-inner-6">
+                </div>
+            </div>
+            <div class="tl-module" id="tl-module-7">
+                <div class="tl-inner-module" id="tl-inner-7"></div>
+            </div>
+            <div class="tl-module" id="tl-module-8">
+                <div class="tl-inner-module" id="tl-inner-8"></div>
+            </div>
+            <div class="tl-module" id="tl-module-9">
+                <div class="tl-inner-module" id="tl-inner-9"></div>
+            </div>
+            <div class="tl-module" id="tl-module-10">
+                <div class="tl-inner-module" id="tl-inner-10"></div>
+            </div>
+
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+        </script>
+
+        <!-- //or just use tween max and it includes all the css and ease pack -->
+        <script src="lib/uncompressed/TweenLite.js"></script>
+        <script src="lib/uncompressed/TimelineLite.js"></script>
+        <script src="lib/uncompressed/easing/EasePack.js"></script>
+
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenLite.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
+        <!-- <script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script> -->
 
 
-<script type="text/javascript" src="js/map.js"></script>
-<!-- <script type="text/javascript" src="js/type.js"></script> -->
-<script src="js/voice.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/map.js"></script>
+        <!-- <script type="text/javascript" src="js/type.js"></script> -->
+        <script src="js/voice.js" type="text/javascript"></script>
 
 
 </body>
+
 </html>
