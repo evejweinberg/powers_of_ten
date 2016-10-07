@@ -51,10 +51,11 @@ html, body {
 #bottom-stuff {
     width: 102%;
     height: 14px;
-    bottom: -178px;
+    bottom: -182px;
     position: fixed;
     margin-left: 0;
     left: 65px;
+    z-index: 50;
 }
 
 #bottom-black {
@@ -64,6 +65,7 @@ html, body {
     position: fixed;
     height: 75px;
     bottom: -192px;
+    z-index: 40;
 }
 
 .tl-module {
@@ -94,13 +96,13 @@ html, body {
     width: 43px;
     height: 45px;
     position: fixed;
-    bottom: -206px;
+    bottom: -200px;
     left: 12px;
     margin: auto;
 }
 
 #play-button:hover {
-    fill: grey;
+    opacity: .2;
     cursor: pointer;
 }
 
@@ -118,6 +120,7 @@ html, body {
     padding: 14px;
     margin-left: 41%;
     border-radius: 5px;
+    box-shadow: 0 8px 6px -6px black;
 }
 
 #begin-box:hover {
@@ -179,4 +182,27 @@ h1 {
     padding: 10px 10px 30px 10px;
     text-align: left;
     width: 340px;
+}
+
+#studio-video {
+    display: none;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 30;
+    /*background: url(polina.jpg) no-repeat;*/
+    background-size: cover;
+}
+
+.dropshadow {
+    /*box-shadow: 1px 1px;*/
+    position: absolute;
+    -webkit-filter: drop-shadow(1px 1px .5px rgba(0, 0, 0, 0.5));
+    filter: url(#drop-shadow);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
 }

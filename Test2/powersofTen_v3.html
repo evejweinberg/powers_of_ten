@@ -22,9 +22,8 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <!-- MAPBOX -->
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
     <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css"> -->
     <!-- <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
@@ -47,7 +46,7 @@
     <audio audio id="myTune"> <source src="images/bg.mp3"></audio>
     <div id="blank-box">
         <div class="box" id="box1">
-            <img id="box-art-0" src="images/box-1.svg">
+            <img id="box-art-0" class="dropshadow" src="images/box-1.svg">
             <header id="titles">
                 <p id="power">POWERS OF TEN</p>
                 <p id="intro-1">An interactive experience dealing with the relative size of things in the Universe</p>
@@ -65,6 +64,10 @@
     <div id='map'></div>
     <div class="container">
 
+        <video src="images/intro.mp4" id="studio-video" autoplay>
+
+      </video>
+
         <!-- <div id='house-div'><img id="house" src="images/house.png"></img>
         </div> -->
         <div id="bottom-black">
@@ -72,9 +75,9 @@
 
         </div>
         <div id="bottom-stuff">
-            <svg>
+
             <img id="play-button" src="images/play1.svg">
-          </svg>
+
 
             <div class="tl-module" id="tl-module-1">
                 <div class="tl-inner-module" id="tl-inner-1">

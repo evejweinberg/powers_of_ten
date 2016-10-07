@@ -1,155 +1,139 @@
-// make sure jquery is loaded
+var centerLON = 40.717799
+var centerLAT = -73.945360
+var startingVol = .15
+var audioElement = document.getElementById('myTune');
+var map, mapStyle;
+var mapInitZoom = 4
+var currentScene = 1
 
 $(document).ready(function() {
-    var startingVol = .15
-    var vidTRY = 40.717799
-    var centerLAT = -73.945360
+// make sure jquery is loaded
+console.log('doc is ready')
+
+audioElement.addEventListener("load", function() {
+
+  document.getElementById('myTune').play()
+  document.getElementById('myTune').volume = startingVol
+})
+
+
+document.getElementById("begin-box").addEventListener("click", startScene1);
+
+document.getElementById("play-button").addEventListener("click", scene2);
+document.getElementById("play-button").addEventListener("click", scene3);
+
+
+
+
+
+
+
+
+function scene2(){
+  console.log('scene2')
+
+
+}
+
+function scene3(){
+  console.log('scene3')
+}
+
+
+
+var map, mapStyle;
+
     var power = document.getElementById('power')
     var intro1 = document.getElementById('intro-1')
     var intro2 = document.getElementById('intro-2')
     var box1 = document.getElementById('box1')
 
-    document.getElementById('myTune').play()
-    document.getElementById('myTune').volume = startingVol
-
-
-
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlandlaW5iZXJnIiwiYSI6IjRhMjg1Yzk4MjM5ZDJhMjI1NTg4YzVmYWE3ZTc1NDY5In0.rAbzx1cyivJzsHv2pxRh2Q';
-    var map, mapStyle;
-    var mapInitZoom = 8
 
 
 
 
 
+    // mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlandlaW5iZXJnIiwiYSI6IjRhMjg1Yzk4MjM5ZDJhMjI1NTg4YzVmYWE3ZTc1NDY5In0.rAbzx1cyivJzsHv2pxRh2Q';
 
-    var videoStyle = {
-        "version": 8,
-        "sources": {
-            "satellite": {
-                "type": "raster",
-                "url": "mapbox://mapbox.satellite",
-                "tileSize": 256
-            },
-            "video2": {
-                "type": "video",
-                "urls": ["images/intro.mp4", "images/intro.mp4"],
-                "coordinates": [
-                    [-73.945350, vidTRY],
-                    [-73.946799, vidTRY],
-                    [-73.946799, 40.717500],
-                    [-73.945350, 40.717500]
-                ]
-            },
-            "overlay": {
-                "type": "image",
-                "url": "images/house.png",
-                "coordinates": [
-                  [centerLAT-.0077, vidTRY+.0043],
-                  [centerLAT+.0077, vidTRY+.0043],
-                  [centerLAT+.0075, vidTRY-.0047],
-                  [centerLAT-.0075, vidTRY-.0047]
-                ]
-            }
 
-        },
-        "layers": [
-          {
-            "id": "background",
-            "type": "background",
-            "paint": {
-                "background-color": "rgb(4,7,14)"
-            }
-        }, {
-            "id": "satellite",
-            "type": "raster",
-            "source": "satellite"
-        },
-        {
-            "id": "image",
-            "type": "raster",
-            "layout":{
-              "visibility": "visible",
-            },
-            "source": "overlay"
-        },
-         {
-            "id": "video",
-            "layout":{
-              "visibility": "visible",
-            },
-            "type": "raster",
-            "source": "video2"
-        }
-      ]
-    };
 
-    // console.log(videoStyle)
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZXZlandlaW5iZXJnIiwiYSI6IjRhMjg1Yzk4MjM5ZDJhMjI1NTg4YzVmYWE3ZTc1NDY5In0.rAbzx1cyivJzsHv2pxRh2Q';
+    map = L.mapbox.map('map', 'mapbox.satellite', { zoomControl: false, zoomAnimation: false })
+    .setView([centerLON, centerLAT], mapInitZoom);
 
-    map = new mapboxgl.Map({
-        container: 'map', // container id
-        style: videoStyle,
-        // style: 'mapbox://styles/evejweinberg/citway9ip004a2inz70zbgv1r', //stylesheet location
-        center: [-73.945360, 40.717533], // starting position
-        bearing: 90,
-        zoom: mapInitZoom // starting zoom
-    });
+
+    //You can find and create appropriate values at
+    // http://maps.nypl.org/warper/ or
+    // http://www.georeferencer.org/
+    var imageOne = 'images/box-1.svg',
+        imageBoundsOne = L.latLngBounds([
+            [centerLON-.1, centerLAT-.1],
+            [centerLON+.1, centerLAT+.1]]);
+
+    var imageTwo = 'images/box-1.svg',
+        imageBoundsTwo = L.latLngBounds([
+            [centerLON-.20, centerLAT-.20],
+            [centerLON+.20, centerLAT+.20]]);
+
+    var imageThree = 'images/box-1.svg',
+          imageBoundsThree = L.latLngBounds([
+            [centerLON-1, centerLAT-1],
+            [centerLON+1, centerLAT+1]]);
+
+var imageFour = 'images/box-1.svg',
+    imageBoundsFour = L.latLngBounds([
+      [centerLON-1.5, centerLAT-1.5],
+      [centerLON+1.5, centerLAT+1.5]]);
+
+
+
+    var overlayOne = L.imageOverlay(imageOne, imageBoundsOne)
+        .addTo(map);
+    var overlayTwo = L.imageOverlay(imageTwo, imageBoundsTwo)
+            .addTo(map);
+    var overlayThree = L.imageOverlay(imageThree, imageBoundsThree)
+            .addTo(map);
+var overlayFour = L.imageOverlay(imageFour, imageBoundsFour)
+                    .addTo(map);
+
+
+
+
+
+
+
+
 
 
 
 
     TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
-    TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,
-        opacity: 100,
+    TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,
         x: -220,
         ease: Expo.easeOut,
         delay: 4,
         onStart: secondZoom
     })
-    TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {
-            y: -130,
-            opacity: 100,
-            x: -220,
+    TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -130,opacity: 100,x: -220,
             ease: Expo.easeOut,
             delay: 8,
             onStart: thirdZoom})
-        //
-        // TweenLite.fromTo(intro2, 2, {opacity:0}, {opacity:100},{delay:3})
-        //
-        // TweenLite.fromTo(box1,2,{width:1000,height:1000,top:-200, y:50,ease:Expo.easeOut},{opacity:100, width:500,height:500,top:100})
 
 
-    function onStart() {
-        console.log('animation started')
-    }
 
-    function onUpdate() {
 
-        console.log('animation is in prgress')
-    }
-
-    function onComplete() {
-        console.log('animation done')
-            // TweenLite.fromTo(power,2,{opacity:0, y:50},{opacity:100, y:-100})
-    }
 
     function secondZoom() {
+        map.setView([centerLON, centerLAT], map.getZoom() + 5);
 
         console.log('secnd zoom was called')
-        map.flyTo({
-            center: [-73.945360, 40.717533],
-            zoom: mapInitZoom + 4,
-            speed: .5,
-            curve: 1,
-            bearing: 50,
-            // easing: function(t) {
-            //   return t;
-            // }
-        })
+
 
     }
 
     function thirdZoom() {
+      map.setView([centerLON, centerLAT], map.getZoom() + 9);
+
       // map.setLayoutProperty('image', 'visibility', 'visible');
 
         console.log('third was called')
@@ -160,37 +144,50 @@ $(document).ready(function() {
         $('#begin-box').delay(5000).fadeIn(1000)
             //  $('#house-div').delay(5000).fadeIn( 1000 )
             //  TweenLite.fromTo($('#house-div'),12,{width:"10%",height:"10%",ease:Expo.easeOut},{width:"100%",height:"100%"})
+          $("#studio-video").fadeIn(3000);
 
-        map.flyTo({
-            center: [-73.945360, 40.717533],
-            zoom: mapInitZoom + 9,
-            speed: .4,
-            curve: 1,
-            bearing: 0,
-            // easing: function(t) {
-            //   return t;
-            // }
-        })
 
     }
 
     function firstZoom() {
+      var pos = 0;
+      var positions = [
+          [centerLON, centerLAT],
+          [centerLON, centerLAT],
+          [centerLON, centerLAT]
+      ];
+        map.setView([centerLON, centerLAT], map.getZoom() + 3);
+
+      //   map.setView([positions[0]], 4, {
+      //     pan: {
+      //         animate: true,
+      //         duration: 7
+      //     },
+      //     zoom: {
+      //         animate: true
+      //     }
+      // });
+
         console.log('first zoom was called')
+        // map.setView([centerLON, centerLAT], map.getZoom() + 5);
+        // map.setView([33.98, -118.42], 5);
+    //       map.setView([centerLON, centerLAT], 2,{
+    //     pan: {
+    //         animate: true,
+    //         duration: 1200
+    //     },
+    //   zoom:{
+    //         animate: true
+    //     }
+    // });
+  }
+
+
             //  $('#house-div').fadeIn( 8000 )
 
 
-        map.flyTo({
-            center: [-73.945360, 40.717533],
-            zoom: mapInitZoom + 2,
-            speed: .4,
-            bearing: 70,
-            curve: 1
-
-        })
-    }
 
 
-}); //onLoad done
 
 
 
@@ -218,10 +215,26 @@ function getSoundAndFadeAudio(audiosnippetId) {
 
 }
 
-document.getElementById("begin-box").addEventListener("click", startScene1);
+
 
 
 function startScene1() {
+    $("#studio-video").fadeOut(1000);
+  var scene1duration = 9000
+
+//i need to animate this not pop from one to the other
+  var zoomOutScene1 = setInterval(function(){map.setView([centerLON, centerLAT], map.getZoom() - 1);
+  },2000)
+
+
+
+  setTimeout(function(){
+    currentScene = 2
+    clearInterval(zoomOutScene1);
+    console.log('scene 1 is done')
+    // document.getElementById("play-button").src = "images/pause1.svg";
+    // alert('scene is done')
+    },scene1duration)
 
     var w = $('#tl-module-1').width()
     var module1width = 0
@@ -229,7 +242,7 @@ function startScene1() {
     $('#tl-inner-1').animate({
         width: 100 + '%'
     }, {
-        duration: 9000,
+        duration: scene1duration,
         easing: 'swing',
         step: function() { // called on every step
             // $('#tl-inner-1').width()/$('#tl-inner-1').parent().width()*100));
@@ -265,9 +278,7 @@ function startScene1() {
             TweenLite.to(power, 2, {opacity: 0,y: -100})
             TweenLite.to(intro1, 2, {opacity: 0,y: -100})
             TweenLite.to(intro2, 2, {opacity: 0,y: -100})
-    tl
-    // console.log('black about to start')
-        .to(tlBlack, fadeTime, {y: -176,ease: Power1.easeOut})
+      tl.to(tlBlack, fadeTime, {y: -176,ease: Power1.easeOut})
         .to(tlMod1, fadeTime,{opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod2, fadeTime,{opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod3, fadeTime,{opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
@@ -278,16 +289,20 @@ function startScene1() {
         .to(tlMod8, fadeTime, {opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod9, fadeTime, {opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod10, fadeTime, {opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
-        // .to(playButton, fadeTime, {y: -200,ease: Power1.easeOut}, '=-.85')
+        .to(playButton, fadeTime, {y: -220,ease: Power1.easeOut}, '=-.85')
 
         console.log('done chaining')
 
-
-
+        $("#begin-box").fadeOut(2000);
 
 
 
 }
+
+
+
+
+
 
 
 
@@ -304,3 +319,6 @@ function startScene1() {
 // });
 
 // map.removeSource('some id');  // remove
+
+
+}); //onLoad done
