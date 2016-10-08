@@ -84,7 +84,13 @@ html, body {
     height: 100%;
 }
 
+#studio-video-inner {
+    width: 100%;
+    height: 50%;
+}
+
 #box-art-0 {
+    display: none;
     position: absolute;
     width: 116%;
     left: -49px;

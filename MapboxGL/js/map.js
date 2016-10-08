@@ -31,7 +31,7 @@ $(document).ready(function() {
 
 
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlandlaW5iZXJnIiwiYSI6IjRhMjg1Yzk4MjM5ZDJhMjI1NTg4YzVmYWE3ZTc1NDY5In0.rAbzx1cyivJzsHv2pxRh2Q';
+    // mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlandlaW5iZXJnIiwiYSI6IjRhMjg1Yzk4MjM5ZDJhMjI1NTg4YzVmYWE3ZTc1NDY5In0.rAbzx1cyivJzsHv2pxRh2Q';
     var map, mapStyle;
     var mapInitZoom = 8
     var power = document.getElementById('power')
@@ -81,10 +81,36 @@ $(document).ready(function() {
     //         "type": "raster",
     //         "source": "satellite"
     //     }
+    //     // {
+    //     //     "id": "image",
+    //     //     "type": "raster",
+    //     //     "layout":{
+    //     //       "visibility": "visible",
+    //     //     },
+    //     //     "source": "overlay"
+    //     // },
+    //     //  {
+    //     //     "id": "video",
+    //     //     "layout":{
+    //     //       "visibility": "visible",
+    //     //     },
+    //     //     "type": "raster",
+    //     //     "source": "video2"
+    //     // }
     //   ]
     // };
 
 
+    // map = new mapboxgl.Map({
+    //     container: 'map', // container id
+    //     style: videoStyle,
+    //     // style: 'mapbox://styles/evejweinberg/citway9ip004a2inz70zbgv1r', //stylesheet location
+    //     center: [centerLAT, centerLON], // starting position
+    //     bearing: 90,
+    //     zoom: mapInitZoom // starting zoom
+    // });
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlandlaW5iZXJnIiwiYSI6IjRhMjg1Yzk4MjM5ZDJhMjI1NTg4YzVmYWE3ZTc1NDY5In0.rAbzx1cyivJzsHv2pxRh2Q';
     map = new mapboxgl.Map({
         container: 'map', // container id
         // style: videoStyle,
@@ -95,72 +121,54 @@ $(document).ready(function() {
     });
 
 
-    map.on('load', function () {
-    map.addSource("points", {
-        "type": "geojson",
-        "data": {
-            "type": "FeatureCollection",
-            "features": [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [centerLAT, centerLON]
-                },
-                "properties": {
-                    "title": "Mapbox DC",
-                    "icon": "monument"
-                }
-            }, {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [centerLAT, centerLON]
-                },
-                "properties": {
-                    "title": "Mapbox SF",
-                    "icon": "harbor"
-                }
-            }]
-        }
-    })
+
+    map.on('load', function() {
+
+        map.addSource("points", {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [centerLAT, centerLON]
+                    },
+                    "properties": {
+                        "title": "Mapbox DC",
+                        "icon": "monument"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [centerLAT, centerLON]
+                    },
+                    "properties": {
+                        "title": "Mapbox SF",
+                        "icon": "harbor"
+                    }
+                }]
+            }
+        })
+
+        map.addLayer({
+            "id": "points",
+            "type": "symbol",
+            "source": "points",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+            }
+        });
 
 
 
-    map.addLayer({
-        "id": "points",
-        "type": "symbol",
-        "source": "points",
-        "layout": {
-            "icon-image": "{icon}-15",
-            "text-field": "{title}",
-            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-            "text-offset": [0, 0.6],
-            "text-anchor": "top"
-        }
+
     });
-
-
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////
-// MAP DONE//////////////////////////////////////////
-// MAP DONE//////////////////////////////////////////
-// MAP DONE//////////////////////////////////////////
-// MAP DONE//////////////////////////////////////////
-// MAP DONE//////////////////////////////////////////
-// MAP DONE//////////////////////////////////////////
-// MAP DONE/////////////////
 
 
 

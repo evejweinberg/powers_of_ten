@@ -38,11 +38,12 @@
 
 
 <body>
-
-
-    <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
+    <!-- LEAFLET -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+
     <audio audio id="myTune"> <source src="images/bg.mp3"></audio>
     <div id="blank-box">
         <div class="box" id="box1">
@@ -63,10 +64,8 @@
 
     <div id='map'></div>
     <div class="container">
-
-        <video src="images/intro.mp4" id="studio-video" autoplay>
-
-      </video>
+        <div id='studio-video'>
+            <video src="images/intro.mp4" id="studio-video-inner" autoplay></video></div>
 
         <!-- <div id='house-div'><img id="house" src="images/house.png"></img>
         </div> -->

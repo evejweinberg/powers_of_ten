@@ -30,25 +30,12 @@
     <!-- MAPBOX -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
 
-    <!-- <link rel="stylesheet" href="style2.css"> -->
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="style2.css">
     <script src="lib/p5.min.js" type="text/javascript"></script>
     <script src="lib/p5.speech.js"></script>
     <!-- Music from Jukedeck - create your own at http://jukedeck.com -->
@@ -87,12 +74,12 @@
 
     <div id='map'></div>
     <div class="main-img perfect-contain">
-        <video class="main-img perfect-contain" src="images/intro.mp4" id="studio-video" autoplay></video>
+        <video class="main-img perfect-contain" src="images/intro.mp4" id="studio-video" autoplay loop></video>
     </div>
     <div class="container">
+        <!-- <div class="container"><img id="top_layer" src="images/top_layer.png"></div> -->
 
-        <!-- <div id='house-div'><img id="house" src="images/house.png"></img>
-        </div> -->
+
         <div id="bottom-black">
 
 
@@ -155,9 +142,10 @@
 
         <!-- MY STUFF -->
         <!-- <script type="text/javascript" src="js/type.js"></script> -->
-        <!-- <script src="js/videoContainer.js" type="text/javascript"></script> -->
+        <script src="js/variables.js" type="text/javascript"></script>
+        <script src="js/videoContainer.js" type="text/javascript"></script>
         <script src="js/voice.js" type="text/javascript"></script>
-        <script src="js/map.js" type="text/javascript"></script>
+        <script src="js/mapv2.js" type="text/javascript"></script>
         <script src="js/markers.js" type="text/javascript"></script>
 
 
