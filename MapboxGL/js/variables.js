@@ -10,4 +10,4 @@ var camSpeed = .07
 var changeTextscene1;
 var currentMeter, destinationMeter, steps;
 var zoomingIn = true;
-var places, geojson;
+var places, geojson, geojsonTwo;

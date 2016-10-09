@@ -47,25 +47,121 @@ $(document).ready(function() {
         TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
         TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
 
-        geojson.features.forEach(function(marker,i) {
-          console.log(marker)
-            // create a DOM element for the marker
-            var el = document.createElement('div');
-            el.className = 'marker';
-            el.style.backgroundImage = 'url(images/marker_' + i+'.png';
-            el.style.width = marker.properties.iconSize[0] + 'px';
-            el.style.height = marker.properties.iconSize[1] + 'px';
+        // geojson.features.forEach(function(marker,i) {
+        //   console.log(marker)
+        //     // create a DOM element for the marker
+        //     var el = document.createElement('div');
+        //     el.className = 'marker';
+        //     el.style.backgroundImage = 'url(images/marker_' + i+'.png';
+        //     el.style.width = marker.properties.iconSize[0] + 'px';
+        //     el.style.height = marker.properties.iconSize[1] + 'px';
+        //
+        //     el.addEventListener('click', function() {
+        //         window.alert(marker.properties.message);
+        //     });
+        //
+        //     // add marker to map
+        //     new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
+        //         .setLngLat(marker.geometry.coordinates)
+        //         .addTo(map);
+        //     // new mapboxgl.DragRotateHandler(map: map,options:{pitchWithRotate :true}).addTo(map);
+        // });
 
-            el.addEventListener('click', function() {
-                window.alert(marker.properties.message);
-            });
 
-            // add marker to map
-            new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
-                .setLngLat(marker.geometry.coordinates)
-                .addTo(map);
-            new DragRotateHandler(map: map,options:{pitchWithRotate :true}).addTo(map);
-        });
+//         var index = supercluster({radius: 40, maxZoom: 16}).load(geojson.features);
+//
+// // get GeoJSON clusters given a bounding box and zoom
+// var clusters = index.getClusters([-180, -85, 180, 85], 2);
+//
+// // get a JSON vector tile in the same format as GeoJSON-VT
+// var tile = index.getTile(7, 523, 125);
+
+// map.addSource("geojson-marker",{
+//     "type": "geojson",
+//     // "data": "https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+//
+//     "data": {
+//
+//       //this is an inline geojson or it can be a URL
+//         "type": "Feature",
+//         "geometry": {
+//             "type": "Point",
+//             "coordinates": [centerLAT, centerLON]
+//         },
+//         "properties": {
+//             "title": "Mapbox DC",
+//             "marker-symbol": "monument"
+//         }
+//
+//
+//   },
+//     "cluster": true,
+//     "clusterRadius": 50
+//
+//
+// });
+//
+// map.addLayer({
+//         "id": "unclustered-points",
+//         "type": "symbol",
+//         "source": "geojson-marker",
+//         "filter": ["!has", "point_count"],
+//         "layout": {
+//             "icon-image": "marker-15"
+//         }
+//     });
+//
+//     layers.forEach(function (layer, i) {
+//         map.addLayer({
+//             "id": "cluster-" + i,
+//             "type": "circle",
+//             "source": "geojson-marker",
+//             "paint": {
+//                 "circle-color": layer[1],
+//                 "circle-radius": 18
+//             },
+//             "filter": i === 0 ?
+//                 [">=", "point_count", layer[0]] :
+//                 ["all",
+//                     [">=", "point_count", layer[0]],
+//                     ["<", "point_count", layers[i - 1][0]]]
+//         });
+//     });
+//
+//     // Add a layer for the clusters' count labels
+//     map.addLayer({
+//         "id": "cluster-count",
+//         "type": "symbol",
+//         "source": "geojson-marker",
+//         "layout": {
+//             "text-field": "{point_count}",
+//             "text-font": [
+//                 "DIN Offc Pro Medium",
+//                 "Arial Unicode MS Bold"
+//             ],
+//             "text-size": 12
+//         }
+//     });
+
+
+
+    //     map.addSource('overlay', {
+    //        type: 'image',
+    //        url: 'images/house.png',
+    //        coordinates: [
+    //            [-74.54, 40.18],
+    //            [-73.52, 40.18],
+    //            [-73.52, 40.17],
+    //            [-74.54, 40.17]
+    //        ]
+    // });
+    //
+    //     map.addLayer({
+    //     'id': 'overlay',
+    //     'source': 'overlay',
+    //     'type': 'raster',
+    //     'paint': {'raster-opacity': 0.85}
+    // });
 
 
 
@@ -80,24 +176,21 @@ $(document).ready(function() {
   ///////////////scenes///////////////////////
 
   function scene1(){
+    document.getElementById("text-top-right").innerHTML="10"
 
     // destinationMeter = 10
     // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
     // Tick()
-
-
-
-
     speaker.speak(text1)
-setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});},1000)
+    //scale video up with tweenLite
+    setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});},1000)
+    $("#studio-video").delay(4000).fadeOut(2000);
+    $('#house-image').addClass('house-scene1')
+    // TweenMax.to("#house-image", 4, {width:"90%",height:"90%", ease:Power2.easeInOut})
 
 
-    $("#studio-video").delay(5000).fadeOut(5000);
-    // var studioVideo = document.getElementById('studio-video')
-    // TweenLite.from(studioVideo, 2, {width: 200,height: 100})
 
-
-    //animate the white box of that scene
+    //animate the white timeline box of that scene
       var w = $('#tl-module-1').width()
       var module1width = 0
       $('#tl-inner-1').animate({
@@ -110,7 +203,7 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
       });
       map.flyTo({
           center: [centerLAT, centerLON],
-          zoom: 16,
+          zoom: 18,
           bearing:-8,
           speed: camSpeed,
           })
@@ -119,6 +212,12 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
 
 
   function scene2(){
+    document.getElementById("text-top-right").innerHTML="100"
+    // $('#house-image').removeClass('house-scene1')
+    $('#house-image').addClass('house-scene2')
+
+    // setTimeout(function(){TweenMax.to("#house-image", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});},1000)
+    $("#house-image").delay(2000).fadeOut(1000);
     // destinationMeter = 100
     // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
     // Tick()
@@ -148,18 +247,20 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
 
     map.flyTo({
         center: [centerLAT, centerLON],
-        zoom: 15,
+        zoom: 17,
         speed: camSpeed,
         })
 
 
   }
 
+
+
   function scene3(){
     // destinationMeter = 1000
     // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
     // Tick()
-    document.getElementById("text-top-right").innerHTML="1000"
+    document.getElementById("text-top-right").innerHTML="1,000"
     console.log('scene3 begin')
     speaker.speak(text3)
     document.getElementById("play-button").removeEventListener("click", scene3);
@@ -177,9 +278,30 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
 
     map.flyTo({
         center: [centerLAT, centerLON],
-        zoom: 14,
+        zoom: 15,
         speed: camSpeed,
+        bearing: 10
         })
+
+        geojson.features.forEach(function(marker,i) {
+          // console.log(marker)
+            // create a DOM element for the marker
+            var el = document.createElement('div');
+            el.className = 'marker';
+            el.style.backgroundImage = 'url(images/marker_' + i+'.png';
+            el.style.width = marker.properties.iconSize[0] + 'px';
+            el.style.height = marker.properties.iconSize[1] + 'px';
+
+            el.addEventListener('click', function() {
+                window.alert(marker.properties.message);
+            });
+
+            // add marker to map
+            new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(map);
+            // new mapboxgl.DragRotateHandler(map: map,options:{pitchWithRotate :true}).addTo(map);
+        });
   }
 
   function scene4(){
@@ -199,6 +321,67 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
         }
     });
 
+    map.flyTo({
+        center: [centerLAT, centerLON],
+        zoom: 12,
+        speed: camSpeed,
+        bearing: 30
+        })
+
+  }
+
+  function scene5(){
+    document.getElementById("text-top-right").innerHTML="100,000"
+    console.log('scene5 begin')
+    speaker.speak(text5)
+    document.getElementById("play-button").removeEventListener("click", scene5);
+    document.getElementById("play-button").addEventListener("click", scene6);
+    var w = $('#tl-module-5').width()
+    var module1width = 0
+    $('#tl-inner-5').animate({
+        width: 100 + '%'
+    }, {
+        duration: scene1duration,
+        easing: 'swing',
+        step: function() { // called on every step
+        }
+    });
+
+    map.flyTo({
+        center: [centerLAT, centerLON],
+        zoom: 10,
+        speed: camSpeed,
+        bearing: 40
+        })
+
+  }
+
+
+
+  function scene6(){
+    document.getElementById("text-top-right").innerHTML="1,000,000"
+    console.log('scene6 begin')
+    speaker.speak(text6)
+    document.getElementById("play-button").removeEventListener("click", scene6);
+    document.getElementById("play-button").addEventListener("click", scene7);
+    var w = $('#tl-module-6').width()
+    var module1width = 0
+    $('#tl-inner-6').animate({
+        width: 100 + '%'
+    }, {
+        duration: scene1duration,
+        easing: 'swing',
+        step: function() { // called on every step
+        }
+    });
+
+    map.flyTo({
+        center: [centerLAT, centerLON],
+        zoom: 8,
+        speed: camSpeed,
+        bearing: 50
+        })
+
   }
 
 
@@ -206,15 +389,6 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
   ///////////////scenes///end////////////////////
   ///////////////scenes///end////////////////////
   ///////////////scenes///end////////////////////
-
-
-
-
-    // TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
-    // TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 6,onStart: secondZoom})
-    // TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -130,opacity: 100,x: -220,ease: Expo.easeOut,delay: 9,onStart: thirdZoom})
-
-
 
 
   function firstZoom() {
@@ -266,10 +440,19 @@ setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",to
       // Tick()
       zoomingIn = false
       document.getElementById("text-top-right").innerHTML="1"
-        console.log('zoom level ' +map.getZoom())
+        // console.log('zoom level ' +map.getZoom())
+        //scale house up with css
+        // $('#house-image').addClass('house-scale-up')
+        $('#house-image').addClass('house-scale-up2')
+
+      $("#house-image").delay(1000).fadeIn(200);
       $('#begin-box').delay(4000).fadeIn(1000)
-        TweenMax.from("#studio-video", 8, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});
-      $("#studio-video").fadeIn(3000);
+      setTimeout(function(){TweenMax.from("#studio-video", 4.5, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
+},2000)
+
+    $("#studio-video").delay(1000).fadeIn(2000);
+        // TweenMax.from("#house-image", 8, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});
+
 
         map.flyTo({
             center: [-73.945360, 40.717533],

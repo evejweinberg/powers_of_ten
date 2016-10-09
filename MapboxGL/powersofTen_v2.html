@@ -36,9 +36,10 @@
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
 
     <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="animation.css">
     <script src="lib/p5.min.js" type="text/javascript"></script>
     <script src="lib/p5.speech.js"></script>
-    <!-- Music from Jukedeck - create your own at http://jukedeck.com -->
+
 
 
 </head>
@@ -46,7 +47,7 @@
 
 <body>
 
-
+    <!-- CLUSTERING LEAFLET -->
     <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
@@ -54,7 +55,7 @@
     <div id="blank-box">
         <div class="box" id="box1">
             <div id="text-tr-box">
-                <p id="text-top-right">10</p>
+                <p id="text-top-right">100,000</p>
                 <p id="text-top-right-dims">METERS</p>
             </div>
             <!-- <img id="box-art-0" src="images/box-1.svg"> -->
@@ -74,6 +75,8 @@
 
     <div id='map'></div>
     <div class="main-img perfect-contain">
+        <img class="main-img perfect-contain" src="images/house2.png" id="house-image"></img>
+
         <video class="main-img perfect-contain" src="images/intro.mp4" id="studio-video" autoplay loop></video>
     </div>
     <div class="container">
