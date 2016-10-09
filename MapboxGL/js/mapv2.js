@@ -13,8 +13,12 @@ $(document).ready(function() {
     document.getElementById('myTune').play()
     document.getElementById('myTune').volume = startingVol
   // })
-    document.getElementById("begin-box").addEventListener("click", loadTimeline);
+    document.getElementById("begin-boxB").addEventListener("click", loadTimeline);
     document.getElementById("play-button").addEventListener("click", scene2);
+    document.getElementById("burg").addEventListener("click", function(){alert('"about" section coming soon - Music by JukeDeck. Inspiration by Ray and Charles Eames. Created by Eve Weinberg. more info to come and a link to the process.')});
+
+    $( "#defaultCanvas0" ).remove();
+
 
 
 
@@ -37,6 +41,7 @@ $(document).ready(function() {
         style: 'mapbox://styles/evejweinberg/citway9ip004a2inz70zbgv1r', //stylesheet location
         center: [centerLAT, centerLON], // starting position
         bearing: 90,
+        interactive: true,
         zoom: mapInitZoom // starting zoom
     });
 
@@ -177,11 +182,22 @@ $(document).ready(function() {
 
   function scene1(){
     document.getElementById("text-top-right").innerHTML="10"
+    document.getElementById("powers-sup").innerHTML="1"
+
 
     // destinationMeter = 10
     // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
     // Tick()
-    speaker.speak(text1)
+    if (p5voice){
+
+      speaker.speak(text1)
+    } else {
+      responsiveVoice.speak(text1.toString(),"US English Female");
+
+    }
+
+
+
     //scale video up with tweenLite
     setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});},1000)
     $("#studio-video").delay(4000).fadeOut(2000);
@@ -213,17 +229,19 @@ $(document).ready(function() {
 
   function scene2(){
     document.getElementById("text-top-right").innerHTML="100"
+    document.getElementById("powers-sup").innerHTML="2"
     // $('#house-image').removeClass('house-scene1')
     $('#house-image').addClass('house-scene2')
+    $("#house-image").delay(2000).fadeOut(900);
 
-    // setTimeout(function(){TweenMax.to("#house-image", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});},1000)
-    $("#house-image").delay(2000).fadeOut(1000);
-    // destinationMeter = 100
-    // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
-    // Tick()
-    // document.getElementById("text-top-right").innerHTML="100"
-    // console.log('scene2 begin')
-    speaker.speak(text2)
+    if (p5voice){
+
+      speaker.speak(text2)
+    } else {
+      responsiveVoice.speak(text2.toString(),"US English Female");
+
+    }
+
     $("#box-art-0").fadeOut(2000);
     document.getElementById("play-button").removeEventListener("click", scene2);
     document.getElementById("play-button").addEventListener("click", scene3);
@@ -261,8 +279,16 @@ $(document).ready(function() {
     // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
     // Tick()
     document.getElementById("text-top-right").innerHTML="1,000"
+    document.getElementById("powers-sup").innerHTML="3"
     console.log('scene3 begin')
-    speaker.speak(text3)
+    if (p5voice){
+
+      speaker.speak(text3)
+    } else {
+      responsiveVoice.speak(text3.toString(),"US English Female");
+
+    }
+
     document.getElementById("play-button").removeEventListener("click", scene3);
     document.getElementById("play-button").addEventListener("click", scene4);
     var w = $('#tl-module-3').width()
@@ -305,9 +331,21 @@ $(document).ready(function() {
   }
 
   function scene4(){
+
+
     document.getElementById("text-top-right").innerHTML="10,000"
+    document.getElementById("powers-sup").innerHTML="4"
     console.log('scene4 begin')
-    speaker.speak(text4)
+
+    if (p5voice){
+
+      speaker.speak(text4)
+    } else {
+      responsiveVoice.speak(text4.toString(),"US English Female");
+
+    }
+
+
     document.getElementById("play-button").removeEventListener("click", scene4);
     document.getElementById("play-button").addEventListener("click", scene5);
     var w = $('#tl-module-4').width()
@@ -332,8 +370,18 @@ $(document).ready(function() {
 
   function scene5(){
     document.getElementById("text-top-right").innerHTML="100,000"
+    document.getElementById("powers-sup").innerHTML="5"
     console.log('scene5 begin')
-    speaker.speak(text5)
+
+    if (p5voice){
+
+      speaker.speak(text5)
+    } else {
+      responsiveVoice.speak(text5.toString(),"US English Female");
+
+    }
+
+
     document.getElementById("play-button").removeEventListener("click", scene5);
     document.getElementById("play-button").addEventListener("click", scene6);
     var w = $('#tl-module-5').width()
@@ -349,9 +397,9 @@ $(document).ready(function() {
 
     map.flyTo({
         center: [centerLAT, centerLON],
-        zoom: 10,
+        zoom: 8,
         speed: camSpeed,
-        bearing: 40
+        bearing: 0
         })
 
   }
@@ -360,8 +408,17 @@ $(document).ready(function() {
 
   function scene6(){
     document.getElementById("text-top-right").innerHTML="1,000,000"
+    document.getElementById("powers-sup").innerHTML="6"
     console.log('scene6 begin')
-    speaker.speak(text6)
+
+    if (p5voice){
+
+      speaker.speak(text6)
+    } else {
+      responsiveVoice.speak(text6.toString(),"US English Female");
+
+    }
+
     document.getElementById("play-button").removeEventListener("click", scene6);
     document.getElementById("play-button").addEventListener("click", scene7);
     var w = $('#tl-module-6').width()
@@ -377,11 +434,16 @@ $(document).ready(function() {
 
     map.flyTo({
         center: [centerLAT, centerLON],
-        zoom: 8,
+        zoom: 4,
         speed: camSpeed,
-        bearing: 50
+        bearing: 0
         })
 
+  }
+
+  function scene7(){
+    console.log('scene 7, nothing here yet')
+    document.getElementById("powers-sup").innerHTML="7"
   }
 
 
@@ -411,7 +473,6 @@ $(document).ready(function() {
 
 
     function secondZoom() {
-
       // destinationMeter = 100
       // steps = Math.abs((currentMeter-destinationMeter))/10
       // Tick()
@@ -446,11 +507,13 @@ $(document).ready(function() {
         $('#house-image').addClass('house-scale-up2')
 
       $("#house-image").delay(1000).fadeIn(200);
-      $('#begin-box').delay(4000).fadeIn(1000)
-      setTimeout(function(){TweenMax.from("#studio-video", 4.5, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
-},2000)
+      $('#begin-boxB').delay(4000).fadeIn(1000)
+        $('#text-tr-box').delay(4000).fadeIn(1000)
 
-    $("#studio-video").delay(1000).fadeIn(2000);
+      setTimeout(function(){TweenMax.from("#studio-video", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
+},2500)
+
+    $("#studio-video").delay(4000).fadeIn(2000);
         // TweenMax.from("#house-image", 8, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});
 
 
@@ -540,7 +603,7 @@ console.log('did audio fade')
         .to(playButton, fadeTime, {y: -220,ease: Power1.easeOut}, '=-.85')
 
 
-        $("#begin-box").fadeOut(2000);
+        $("#begin-boxB").fadeOut(2000);
         console.log('tcalling scene 1')
         scene1()
 

@@ -100,11 +100,16 @@ html, body {
 }
 
 #text-tr-box {
+    display: none;
     text-shadow: 2px 3px 21px black;
     position: absolute;
     top: 100%;
     /* float: left; */
     text-align: left;
+}
+
+#powers {
+    font-size: 40px;
 }
 
 #text-top-right {
@@ -132,7 +137,7 @@ html, body {
     cursor: pointer;
 }
 
-#begin-box {
+#begin-boxB {
     margin-top: 94px;
     display: none;
     background-color: black;
@@ -149,7 +154,7 @@ html, body {
     box-shadow: 0 8px 6px -6px black;
 }
 
-#begin-box:hover {
+#begin-boxB:hover {
     background-color: #3d3d3d;
     cursor: pointer;
 }
@@ -273,6 +278,16 @@ h1 {
     filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
 }
 
-4')";
+#burg {
+    position: fixed;
+    right: 0px;
+    z-index: 200;
+    top: 3px;
+    width: 50px;
+    height: 39px;
+}
 
+#burg:hover {
+    opacity: .4;
+    cursor: pointer;
 }

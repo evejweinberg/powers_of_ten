@@ -11,3 +11,7 @@ var changeTextscene1;
 var currentMeter, destinationMeter, steps;
 var zoomingIn = true;
 var places, geojson, geojsonTwo;
+var text1;
+var p5voice = true;
+var speaker;
+var scene1 = true
