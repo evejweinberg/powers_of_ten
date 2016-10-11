@@ -172,29 +172,6 @@ html, body {
     pointer-events: none;
 }
 
-#box2 {
-    position: absolute;
-}
-
-#box1 {
-    position: absolute;
-}
-
-.box {
-    /*box-shadow: 2px 3px 21px rgba(0, 0, 0, 0.4);*/
-    border: 2px white solid;
-    width: 500px;
-    height: 500px;
-    z-index: 100;
-    position: relative;
-    /*display: block;*/
-    margin: auto;
-    top: 20%;
-    /*margin-right: auto ;*/
-    /*left: 50%;*/
-    /*text-align: center ;*/
-}
-
 input {
     font-size: 12px;
 }

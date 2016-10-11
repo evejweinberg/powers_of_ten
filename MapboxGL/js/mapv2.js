@@ -232,20 +232,13 @@ $(document).ready(function() {
 
 
   function scene2(){
-    // setTimeout(function(){
-    //   TweenMax.to("#box2", 6, {
-    //     left:$(window).width()/2-($("#box2").width()/2),
-    //     top:$(window).height()/2-($("#box2").height()/2),
-    //     width:"10%", height:"10%", ease:Power2.easeInOut
-    //   })},10)
-    // centerThis('#box2')
-
     Tick(10, 100)
     // document.getElementById("text-top-right").innerHTML="100"
     document.getElementById("powers-sup").innerHTML="2"
     // $('#house-image').removeClass('house-scene1')
     $('#house-image').addClass('house-scene2')
     $("#house-image").delay(4000).fadeOut(1000);
+    scaleBoxDown('#box2',100,100)
 
     if (p5voice){
 
@@ -288,6 +281,9 @@ $(document).ready(function() {
 
 
   function scene3(){
+    scaleBoxDown('#box2',0,0)
+    scaleBoxDown('#box1',100,100)
+    scaleBoxDown('#box3',500,500)
     Tick(100, 1000)
     document.getElementById("powers-sup").innerHTML="3"
     console.log('scene3 begin')
@@ -330,8 +326,14 @@ $(document).ready(function() {
             el.style.height = marker.properties.iconSize[1] + 'px';
 
             el.addEventListener('click', function() {
-                window.alert(marker.properties.message);
+              var popup = new mapboxgl.Popup()
+              .setLngLat(centerLON,centerLAT)
+              .setHTML(marker.properties.message)
+              .addTo(map)
+              // window.alert(marker.properties.message);
             });
+
+            scene3Markers.push(el)
 
             // add marker to map
             new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
@@ -343,7 +345,9 @@ $(document).ready(function() {
   function scene4(){
     Tick(1000, 10000)
 
-
+    for (i in scene3Markers){
+      scene3Markers[i].style.display = 'none'
+    }
     document.getElementById("text-top-right").innerHTML="10,000"
     document.getElementById("powers-sup").innerHTML="4"
     console.log('scene4 begin')
@@ -500,10 +504,10 @@ $(document).ready(function() {
      $('#text-tr-box').delay(4000).fadeIn(1000)
      $("#numbers-pow").delay(4000).fadeIn(1000)
 
-      setTimeout(function(){TweenMax.from("#studio-video", 3.5, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
-},3000)
+      setTimeout(function(){TweenMax.from("#studio-video", 2.6, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
+},4500)
 
-    $("#studio-video").delay(3000).fadeIn(1000);
+    $("#studio-video").delay(4500).fadeIn(400);
         // TweenMax.from("#house-image", 8, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});
 
 

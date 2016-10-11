@@ -68,7 +68,10 @@ function getMarkersfromMarkersPage() {
                 "coordinates": [centerLAT, centerLON]
 
             }
-        }, {
+        },
+
+
+          {
             "type": "Feature",
             "properties": {
                 "message": places[1].name,

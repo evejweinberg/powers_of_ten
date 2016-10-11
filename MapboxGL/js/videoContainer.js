@@ -66,11 +66,16 @@ function centerThis(string){
 
 
         $(string).css(cssObj)
-            // .animate({
-            //     height:getHeight+'px',
-            //     width:getWidth+'px',
-            //     marginTop:-marginTop+'px',
-            //     marginLeft:-marginLeft+'px'
-            //     },10000);
 
-				}
+
+}
+
+
+
+function scaleBoxDown(thing, width, height){
+   $(thing).animate({'width':width,'height':height, 'left':'45%','top':'50%'},9000);
+  $(thing).css("opacity", ".5")
+  $(thing).css("borderWidth", "1px")
+
+
+}
