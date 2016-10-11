@@ -2,17 +2,18 @@ places = [{
         "name": "Blue Stove",
         "zoom": 2,
         "coordinates": [-73.945032, 40.917437]
-    },
+      },
 
-    {
+      {
         "name": "McCarren Park Track",
         "zoom": 2,
         "coordinates": [-73.951142, 40.719822]
-    }, {
+      },
+      {
         "name": "Night of Joy",
         "zoom": 2,
         "coordinates": [-73.949972, 40.717000]
-    },
+      }
 
 
 ]
@@ -70,7 +71,7 @@ function getMarkersfromMarkersPage() {
         }, {
             "type": "Feature",
             "properties": {
-                "message": "Bar",
+                "message": places[1].name,
                 "iconSize": [50, 50]
             },
             "geometry": {
@@ -81,7 +82,7 @@ function getMarkersfromMarkersPage() {
         }, {
             "type": "Feature",
             "properties": {
-                "message": "Baz",
+                "message": places[2].name,
                 "iconSize": [50, 50]
             },
             "geometry": {

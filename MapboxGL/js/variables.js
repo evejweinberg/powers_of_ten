@@ -1,6 +1,6 @@
 var centerLON = 40.717799
 var centerLAT = -73.945360
-var startingVol = .15
+var startingVol = .19
 var audioElement = document.getElementById('myTune');
 var map, mapStyle;
 var mapInitZoom = 8
@@ -15,3 +15,4 @@ var text1;
 var p5voice = true;
 var speaker;
 var scene1 = true
+//var tickingUp;

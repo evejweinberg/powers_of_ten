@@ -1,5 +1,10 @@
 function perfectCenterImage(){
-	console.log('resize getting called')
+
+	var boxcenterX = ($(window).width()/2)-250;
+	var boxcenterY = ($(window).height()/2)-250;
+	$(".box").css({"left":boxcenterX});
+	$(".box").css({"top":boxcenterY});
+		// centerThis('#box2')
 
 	$(".perfect-contain").each(function(i){
 		//define containerRatio as containerHeight/containerWidth
@@ -33,3 +38,39 @@ function perfectCenterImage(){
 
 $(window).load(function(){perfectCenterImage();});
 $(window).resize(function(){perfectCenterImage();});
+
+
+
+function centerThis(string){
+
+	var boxcenterX = ($(window).width()/2)-($(string).width()/2);
+	var boxcenterY = ($(window).height()/2)-($(string).height()/2);
+	$(".box").css({"left":boxcenterX});
+	$(".box").css({"top":boxcenterY});
+
+
+		var getWidth = $(string).width();
+    var getHeight = $(string).height();
+		console.log(getWidth)
+    var marginTop = getWidth/2;
+    var marginLeft = getWidth/2;
+
+
+    var cssObj = {
+                        'left':'50%',
+                        'top':'50%',
+                        'margin':'-'+(marginTop)+'px 0 0 -'+(marginLeft)+'px',
+                        'width':getWidth+'px',
+                        'height':getHeight+'px',
+                    }
+
+
+        $(string).css(cssObj)
+            // .animate({
+            //     height:getHeight+'px',
+            //     width:getWidth+'px',
+            //     marginTop:-marginTop+'px',
+            //     marginLeft:-marginLeft+'px'
+            //     },10000);
+
+				}

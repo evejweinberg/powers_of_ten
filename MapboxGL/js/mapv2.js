@@ -15,9 +15,22 @@ $(document).ready(function() {
   // })
     document.getElementById("begin-boxB").addEventListener("click", loadTimeline);
     document.getElementById("play-button").addEventListener("click", scene2);
-    document.getElementById("burg").addEventListener("click", function(){alert('"about" section coming soon - Music by JukeDeck. Inspiration by Ray and Charles Eames. Created by Eve Weinberg. more info to come and a link to the process.')});
+    document.querySelector( "#nav-toggle" ).addEventListener( "click", function() {
 
-    $( "#defaultCanvas0" ).remove();
+
+          if  (this.classList == "active"){
+            TweenLite.to(document.getElementById('about-side-info'),3,{right:-400,ease:Expo.easeOut})
+
+            console.log('go in')
+          } else {
+            TweenLite.to(document.getElementById('about-side-info'),3,{right:-10,ease:Expo.easeOut})
+
+          }
+            this.classList.toggle( "active" );
+      });
+
+
+    $("#defaultCanvas0").remove();
 
 
 
@@ -181,13 +194,8 @@ $(document).ready(function() {
   ///////////////scenes///////////////////////
 
   function scene1(){
-    document.getElementById("text-top-right").innerHTML="10"
+    Tick(1, 10)
     document.getElementById("powers-sup").innerHTML="1"
-
-
-    // destinationMeter = 10
-    // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
-    // Tick()
     if (p5voice){
 
       speaker.speak(text1)
@@ -197,14 +205,10 @@ $(document).ready(function() {
     }
 
 
-
     //scale video up with tweenLite
-    setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});},1000)
+    setTimeout(function(){TweenMax.to("#studio-video", 4, {width:"1%", left:"50%",top:"55%",height:"1%", ease:Power2.easeInOut});},1000)
     $("#studio-video").delay(4000).fadeOut(2000);
     $('#house-image').addClass('house-scene1')
-    // TweenMax.to("#house-image", 4, {width:"90%",height:"90%", ease:Power2.easeInOut})
-
-
 
     //animate the white timeline box of that scene
       var w = $('#tl-module-1').width()
@@ -228,11 +232,20 @@ $(document).ready(function() {
 
 
   function scene2(){
-    document.getElementById("text-top-right").innerHTML="100"
+    // setTimeout(function(){
+    //   TweenMax.to("#box2", 6, {
+    //     left:$(window).width()/2-($("#box2").width()/2),
+    //     top:$(window).height()/2-($("#box2").height()/2),
+    //     width:"10%", height:"10%", ease:Power2.easeInOut
+    //   })},10)
+    // centerThis('#box2')
+
+    Tick(10, 100)
+    // document.getElementById("text-top-right").innerHTML="100"
     document.getElementById("powers-sup").innerHTML="2"
     // $('#house-image').removeClass('house-scene1')
     $('#house-image').addClass('house-scene2')
-    $("#house-image").delay(2000).fadeOut(900);
+    $("#house-image").delay(4000).fadeOut(1000);
 
     if (p5voice){
 
@@ -266,7 +279,7 @@ $(document).ready(function() {
     map.flyTo({
         center: [centerLAT, centerLON],
         zoom: 17,
-        speed: camSpeed,
+        speed: .06,
         })
 
 
@@ -275,10 +288,7 @@ $(document).ready(function() {
 
 
   function scene3(){
-    // destinationMeter = 1000
-    // steps = Math.abs((currentMeter-destinationMeter))/scene1duration
-    // Tick()
-    document.getElementById("text-top-right").innerHTML="1,000"
+    Tick(100, 1000)
     document.getElementById("powers-sup").innerHTML="3"
     console.log('scene3 begin')
     if (p5voice){
@@ -306,6 +316,7 @@ $(document).ready(function() {
         center: [centerLAT, centerLON],
         zoom: 15,
         speed: camSpeed,
+        pan: [centerLAT, centerLON],
         bearing: 10
         })
 
@@ -326,11 +337,11 @@ $(document).ready(function() {
             new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
                 .setLngLat(marker.geometry.coordinates)
                 .addTo(map);
-            // new mapboxgl.DragRotateHandler(map: map,options:{pitchWithRotate :true}).addTo(map);
         });
   }
 
   function scene4(){
+    Tick(1000, 10000)
 
 
     document.getElementById("text-top-right").innerHTML="10,000"
@@ -369,7 +380,7 @@ $(document).ready(function() {
   }
 
   function scene5(){
-    document.getElementById("text-top-right").innerHTML="100,000"
+    Tick(10000, 100000)
     document.getElementById("powers-sup").innerHTML="5"
     console.log('scene5 begin')
 
@@ -407,7 +418,7 @@ $(document).ready(function() {
 
 
   function scene6(){
-    document.getElementById("text-top-right").innerHTML="1,000,000"
+    Tick(100000, 1000000)
     document.getElementById("powers-sup").innerHTML="6"
     console.log('scene6 begin')
 
@@ -442,6 +453,7 @@ $(document).ready(function() {
   }
 
   function scene7(){
+    Tick(1000000, 10000000)
     console.log('scene 7, nothing here yet')
     document.getElementById("powers-sup").innerHTML="7"
   }
@@ -454,12 +466,6 @@ $(document).ready(function() {
 
 
   function firstZoom() {
-    // currentMeter = 100000
-    // destinationMeter = 10000
-    // steps = Math.abs((currentMeter-destinationMeter))/10
-    // Tick()
-    document.getElementById("text-top-right").innerHTML="100,000"
-
           console.log('zoom level ' +map.getZoom())
             map.flyTo({
                 center: [centerLAT, centerLON],
@@ -473,13 +479,6 @@ $(document).ready(function() {
 
 
     function secondZoom() {
-      // destinationMeter = 100
-      // steps = Math.abs((currentMeter-destinationMeter))/10
-      // Tick()
-      document.getElementById("text-top-right").innerHTML="10,000"
-
-        console.log('zoom level ' +map.getZoom())
-
         map.flyTo({
             center: [centerLAT, centerLON],
             zoom: mapInitZoom + 4,
@@ -494,26 +493,17 @@ $(document).ready(function() {
     }
 
     function thirdZoom() {
-      // console.log('current meter is '+ currentMeter)
-      // destinationMeter = 10
-      // steps = Math.abs((currentMeter-destinationMeter))/10
-      // console.log(steps)
-      // Tick()
-      zoomingIn = false
       document.getElementById("text-top-right").innerHTML="1"
-        // console.log('zoom level ' +map.getZoom())
-        //scale house up with css
-        // $('#house-image').addClass('house-scale-up')
-        $('#house-image').addClass('house-scale-up2')
-
+      $('#house-image').addClass('house-scale-up2')
       $("#house-image").delay(1000).fadeIn(200);
       $('#begin-boxB').delay(4000).fadeIn(1000)
-        $('#text-tr-box').delay(4000).fadeIn(1000)
+     $('#text-tr-box').delay(4000).fadeIn(1000)
+     $("#numbers-pow").delay(4000).fadeIn(1000)
 
-      setTimeout(function(){TweenMax.from("#studio-video", 4, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
-},2500)
+      setTimeout(function(){TweenMax.from("#studio-video", 3.5, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut})
+},3000)
 
-    $("#studio-video").delay(4000).fadeIn(2000);
+    $("#studio-video").delay(3000).fadeIn(1000);
         // TweenMax.from("#house-image", 8, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});
 
 
@@ -579,7 +569,7 @@ function loadTimeline() {
     var tl = new TimelineLite();
     var fadeTime = 1.1
     $('#myTune').animate({
-        volume: 0
+        volume: .10
     }, 10000);
 
     var intro1 = document.getElementById('intro-1')
@@ -590,6 +580,7 @@ console.log('did audio fade')
         TweenLite.to(intro1, .7, {opacity: 0})
         TweenLite.to(intro2, .7, {opacity: 0})
       tl.to(tlBlack, fadeTime, {y: -176,ease: Power1.easeOut})
+        .to(playButton, fadeTime, {y: -220,ease: Power1.easeOut}, '=-.85')
         .to(tlMod1, fadeTime,{opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod2, fadeTime,{opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod3, fadeTime,{opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
@@ -600,7 +591,7 @@ console.log('did audio fade')
         .to(tlMod8, fadeTime, {opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod9, fadeTime, {opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
         .to(tlMod10, fadeTime, {opacity: 100,y: -200,ease: Power1.easeOut}, '=-.85')
-        .to(playButton, fadeTime, {y: -220,ease: Power1.easeOut}, '=-.85')
+
 
 
         $("#begin-boxB").fadeOut(2000);
@@ -613,34 +604,45 @@ console.log('did audio fade')
 
 
 
-function changeMeters(currentMeter) {
-  console.log(currentMeter + ' passed to changeMeter()')
-  document.getElementById("text-top-right").innerHTML=currentMeter
 
 
-}
+function Tick(startVal, endVal) {
+      // console.log('called Tick ' + startVal + ' to '+endVal)
+  var tempStartVal = startVal;
+      // console.log(tempStartVal)
+  //rate per second
+  // var interval = Math.abs((endVal-startVal))/9
+  var interval = 9/Math.abs((endVal-startVal))
 
 
-function Tick(currentMeter, destinationMeter) {
-  this.currentMeter = currentMeter
-  this.destinationMeter = destinationMeter
-  if (this.currentMeter == this.destinationMeter) {
-        console.log('reached target')
-        clearInterval(tickingUp)
-return;
-}
-    if (zoomingIn){
 
-        this.currentMeter -= 10;
-      } else {
-        this.currentMeter += 10;
+
+  var tickingUp = setInterval(function(){
+    // console.log('tempstart is ' + tempStartVal)
+    //var tempStartVal = parseInt(document.getElementById("text-top-right").innerHTML)
+    if (tempStartVal < endVal){
+
+      tempStartVal += 1
+      document.getElementById("text-top-right").innerHTML=tempStartVal
+
+    }else{
+      document.getElementById("text-top-right").innerHTML=endVal
+      clearInterval(tickingUp)
     }
-    //change the text
-  changeMeters(this.currentMeter)
-  //call tick
-  var tickingUp = setInterval(Tick, 2000);
-  return currentMeter
-  console.log(currentMeter)
+
+  }, interval*1000);
+
+
+  setTimeout(function(){
+  //
+      console.log('manually overriding value')
+  //
+      if (tempStartVal != endVal){
+        document.getElementById("text-top-right").innerHTML=endVal
+        clearInterval(tickingUp)
+  //
+      }
+    },10000)
 }
 
 

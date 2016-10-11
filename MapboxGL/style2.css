@@ -6,6 +6,10 @@ html, body {
     color: white;
 }
 
+.text-shadow {
+    text-shadow: 2px 3px 21px black;
+}
+
 #map {
     position: absolute;
     top: 0;
@@ -42,7 +46,7 @@ html, body {
 }
 
 #titles {
-    text-shadow: 2px 3px 21px black;
+    /*text-shadow: 2px 3px 21px black;*/
     z-index: 30;
     font-size: 40px;
     position: relative;
@@ -138,6 +142,7 @@ html, body {
 }
 
 #begin-boxB {
+    pointer-events: all;
     margin-top: 94px;
     display: none;
     background-color: black;
@@ -163,6 +168,15 @@ html, body {
     display: block;
     width: 100%;
     height: 100%;
+    position: absolute;
+    pointer-events: none;
+}
+
+#box2 {
+    position: absolute;
+}
+
+#box1 {
     position: absolute;
 }
 
@@ -266,6 +280,7 @@ h1 {
 .main-img {
     width: 100%;
     height: 100%;
+    pointer-events: none;
     /*background: black;*/
 }
 
@@ -290,4 +305,39 @@ h1 {
 #burg:hover {
     opacity: .4;
     cursor: pointer;
+}
+
+#about-side-info {
+    width: 229px;
+    height: 100%;
+    line-height: 27px;
+    top: 0px;
+    position: absolute;
+    right: -500px;
+    background-color: black;
+    color: white;
+    padding: 37px;
+    z-index: 405;
+}
+
+#defaultCanvas0 {
+    position: absolute;
+    z-index: -800;
+    top: 0px;
+    left: 0px;
+}
+
+#powers-sup {
+    vertical-align: top;
+    position: relative;
+    top: -3px;
+    font-size: 22px;
+    padding-left: 5px;
+}
+
+#numbers-pow {
+    float: right;
+    padding-left: 509px;
+    position: absolute;
+    display: none;
 }
