@@ -8,9 +8,9 @@ var text6 = ["Now we are pulling out to a view of 1,000,000 meters wide. Ten to 
 
 
 function setup() {
-  // createCanvas(windowWidth, windowHeight);
-  speaker = new p5.Speech("Agnes");
-  // speaker = new p5.Speech("Karen");
+  createCanvas(100,100);
+  // speaker = new p5.Speech("Agnes");
+  speaker = new p5.Speech("Karen");
     // speaker = new p5.Speech("Moira");
   // speaker = new p5.Speech("Vicki");
   // speaker = new p5.Speech("Samantha");
@@ -20,5 +20,5 @@ function setup() {
 
 
 function speakingBegin(){
-  speaker.setVoice("Agnes")
+  // speaker.setVoice("Agnes")
 }

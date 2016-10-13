@@ -1,0 +1,44 @@
+#box3, #box4, #box5, #box6, #box7, #box8, #box9, #box10 {
+    border: 2px white solid;
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    left: -50px;
+    top: -50px;
+}
+
+#box2 {
+    border: 2px white solid;
+    position: absolute;
+    /*z-index: 50;*/
+}
+
+#box1static {
+    border: 0px red dashed;
+    position: absolute;
+    z-index: 300;
+}
+
+#box-default {
+    position: absolute;
+}
+
+.box {
+    /*box-shadow: 2px 3px 21px rgba(0, 0, 0, 0.4);*/
+    border: 1px white solid;
+    width: 500px;
+    height: 500px;
+    z-index: 100;
+    position: relative;
+    /*display: block;*/
+    margin: auto;
+    /*top: 20%;*/
+    /*margin-right: auto ;*/
+    /*left: 50%;*/
+    /*text-align: center ;*/
+}
+
+.mapboxgl-popup {
+    max-width: 400px;
+    background-color: black;
+}

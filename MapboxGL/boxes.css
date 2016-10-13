@@ -1,17 +1,22 @@
+#box3, #box4, #box5, #box6, #box7, #box8, #box9, #box10 {
+    border: 2px white solid;
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    left: -50px;
+    top: -50px;
+}
+
 #box2 {
     border: 2px white solid;
     position: absolute;
-    z-index: 50;
+    /*z-index: 50;*/
 }
 
-#box3 {
-    border: 2px white solid;
+#box1static {
+    border: 0px red dashed;
     position: absolute;
-    width: 1000px;
-    height: 1000px;
-    left: -5%;
-    top: -5%;
-    z-index: 50;
+    z-index: 300;
 }
 
 #box-default {
@@ -27,7 +32,7 @@
     position: relative;
     /*display: block;*/
     margin: auto;
-    top: 20%;
+    /*top: 20%;*/
     /*margin-right: auto ;*/
     /*left: 50%;*/
     /*text-align: center ;*/

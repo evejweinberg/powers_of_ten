@@ -30,7 +30,7 @@ $(document).ready(function() {
       });
 
 
-    $("#defaultCanvas0").remove();
+    // $("#defaultCanvas0").remove();
 
 
 
@@ -62,84 +62,8 @@ $(document).ready(function() {
 
     map.on('load', function() {
         TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
-        TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 1,onStart: secondZoom})
-        TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 1,onStart: thirdZoom})
-
-//         },
-//         "properties": {
-//             "title": "Mapbox DC",
-//             "marker-symbol": "monument"
-//         }
-//
-//
-//   },
-//     "cluster": true,
-//     "clusterRadius": 50
-//
-//
-// });
-//
-// map.addLayer({
-//         "id": "unclustered-points",
-//         "type": "symbol",
-//         "source": "geojson-marker",
-//         "filter": ["!has", "point_count"],
-//         "layout": {
-//             "icon-image": "marker-15"
-//         }
-//     });
-//
-//     layers.forEach(function (layer, i) {
-//         map.addLayer({
-//             "id": "cluster-" + i,
-//             "type": "circle",
-//             "source": "geojson-marker",
-//             "paint": {
-//                 "circle-color": layer[1],
-//                 "circle-radius": 18
-//             },
-//             "filter": i === 0 ?
-//                 [">=", "point_count", layer[0]] :
-//                 ["all",
-//                     [">=", "point_count", layer[0]],
-//                     ["<", "point_count", layers[i - 1][0]]]
-//         });
-//     });
-//
-//     // Add a layer for the clusters' count labels
-//     map.addLayer({
-//         "id": "cluster-count",
-//         "type": "symbol",
-//         "source": "geojson-marker",
-//         "layout": {
-//             "text-field": "{point_count}",
-//             "text-font": [
-//                 "DIN Offc Pro Medium",
-//                 "Arial Unicode MS Bold"
-//             ],
-//             "text-size": 12
-//         }
-//     });
-
-
-
-    //     map.addSource('overlay', {
-    //        type: 'image',
-    //        url: 'images/house.png',
-    //        coordinates: [
-    //            [-74.54, 40.18],
-    //            [-73.52, 40.18],
-    //            [-73.52, 40.17],
-    //            [-74.54, 40.17]
-    //        ]
-    // });
-    //
-    //     map.addLayer({
-    //     'id': 'overlay',
-    //     'source': 'overlay',
-    //     'type': 'raster',
-    //     'paint': {'raster-opacity': 0.85}
-    // });
+        TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
+        TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
 
 
 
@@ -156,13 +80,13 @@ $(document).ready(function() {
   function scene1(){
     Tick(1, 10)
     document.getElementById("powers-sup").innerHTML="1"
-    if (p5voice){
+    // if (p5voice){
 
       speaker.speak(text1)
-    } else {
-      responsiveVoice.speak(text1.toString(),"US English Female");
+    // } else {
+      // responsiveVoice.speak(text1.toString(),"US English Female");
 
-    }
+    // }
 
 
     //scale video up with tweenLite
@@ -193,12 +117,13 @@ $(document).ready(function() {
 
   function scene2(){
     Tick(10, 100)
+    scaleBoxDown('#box2',100,100,.4)
+    scaleBoxDown('#box3', 500, 500, 1)
     // document.getElementById("text-top-right").innerHTML="100"
     document.getElementById("powers-sup").innerHTML="2"
     // $('#house-image').removeClass('house-scene1')
     $('#house-image').addClass('house-scene2')
-    $("#house-image").delay(4000).fadeOut(1000);
-    scaleBoxDown('#box2',100,100)
+    $("#house-image").delay(4200).fadeOut(1000);
 
     if (p5voice){
 
@@ -221,7 +146,7 @@ $(document).ready(function() {
         easing: 'swing',
         step: function() {
           if (currentMeter<100){
-            console.log('yup')
+            // console.log('yup')
 
             // document.getElementById("text-top-right").innerHTML=currentMeter
             currentMeter++
@@ -232,7 +157,7 @@ $(document).ready(function() {
     map.flyTo({
         center: [centerLAT, centerLON],
         zoom: 17,
-        speed: .06,
+        speed: .05,
         })
 
 
@@ -241,9 +166,10 @@ $(document).ready(function() {
 
 
   function scene3(){
-    scaleBoxDown('#box2',0,0)
-    scaleBoxDown('#box1',100,100)
-    scaleBoxDown('#box3',500,500)
+    scaleBoxDown('#box2', 0, 0, 0)
+    scaleBoxDown('#box3', 100, 100, .4)
+    scaleBoxDown('#box4', 500, 500, 1)
+
     Tick(100, 1000)
     document.getElementById("powers-sup").innerHTML="3"
     console.log('scene3 begin')
@@ -309,6 +235,9 @@ $(document).ready(function() {
 
   function scene4(){
     Tick(1000, 10000)
+    scaleBoxDown('#box3', 0, 0, 0)
+    scaleBoxDown('#box4', 100, 100, .4)
+    scaleBoxDown('#box5', 500, 500, 1)
 
     for (i in scene3Markers){
       scene3Markers[i].style.display = 'none'
@@ -350,6 +279,9 @@ $(document).ready(function() {
 
   function scene5(){
     Tick(10000, 100000)
+    scaleBoxDown('#box4', 0, 0, 0)
+    scaleBoxDown('#box5', 0,0,0)
+    scaleBoxDown('#box6', 500, 500, 1)
     document.getElementById("powers-sup").innerHTML="5"
     console.log('scene5 begin')
 
@@ -388,6 +320,9 @@ $(document).ready(function() {
 
   function scene6(){
     Tick(100000, 1000000)
+    scaleBoxDown('#box5', 0, 0, 0)
+    scaleBoxDown('#box6', 0,0,0)
+    scaleBoxDown('#box7', 500, 500, 1)
     document.getElementById("powers-sup").innerHTML="6"
     console.log('scene6 begin')
 
@@ -423,6 +358,9 @@ $(document).ready(function() {
 
   function scene7(){
     Tick(1000000, 10000000)
+    scaleBoxDown('#box6', 0, 0, 0)
+    scaleBoxDown('#box7', 100, 100, .4)
+    scaleBoxDown('#box8', 500, 500, 1)
     console.log('scene 7, nothing here yet')
     document.getElementById("powers-sup").innerHTML="7"
   }

@@ -1,0 +1,278 @@
+<!DOCTYPEcenterBoxDivs
+<html>
+
+<head>
+
+
+
+
+    <meta charset=utf-8 />
+    <title>POWERS OF TEN</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!-- JQUERY -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+
+
+
+    <style media="screen">
+        body {
+            background-color: black;
+        }
+
+        #box2 {
+            border: 2px white solid;
+            position: absolute;
+            /*z-index: 50;*/
+        }
+
+        #box3,
+        #box4,
+        #box5,
+        #box6,
+        #box7,
+        #box8,
+        #box9,
+        #box10 {
+            border: 2px white solid;
+            position: absolute;
+            width: 2000px;
+            height: 2000px;
+            left: -50px;
+            top: -50px;
+        }
+
+        #box-default {
+            position: absolute;
+        }
+
+        button {
+            z-index: 100;
+            position: relative;
+            top: 0px;
+            left: 0px;
+            float: left;
+        }
+
+        .box {
+            border: 1px white solid;
+            width: 500px;
+            height: 500px;
+            position: relative;
+            margin: auto;
+            top: 20%;
+        }
+
+        #blank-box {
+            display: block;
+            left: 0px;
+            top: 0px;
+            width: 98%;
+            height: 97%;
+            position: absolute;
+            border: 20px red solid;
+            /*pointer-events: none;*/
+        }
+    </style>
+
+
+
+
+</head>
+
+
+<body>
+
+    <button id="button3" type="button">scene3</button>
+    <button id="button4" type="button">scene4</button>
+    <button id="button5" type="button">scene5</button>
+    <button id="button6" type="button">scene6</button>
+    <button id="button7" type="button">scene7</button>
+    <button id="button8" type="button">scene8</button>
+    <button id="button9" type="button">scene9</button>
+    <button id="button10" type="button">scene10</button>
+
+    <div id="blank-box">
+        <div class="box boxstart" id="box2"></div>
+        <div class="box boxstart" id="box3"></div>
+        <div class="box boxstart" id="box4"></div>
+        <div class="box boxstart" id="box4"></div>
+        <div class="box boxstart" id="box5"></div>
+        <div class="box boxstart" id="box6"></div>
+        <div class="box boxstart" id="box7"></div>
+        <div class="box boxstart" id="box8"></div>
+        <div class="box boxstart" id="box9"></div>
+        <div class="box boxstart" id="box10"></div>
+        <div class="box" id="box-default">
+            <div id="numbers-pow" class="text-shadow" <h1>
+                <span id="powers">10
+              <sup id="powers-sup">0</sup>
+            </h1>
+            </span>
+            </div>
+            <div class="text-shadow" id="text-tr-box">
+                <p id="text-top-right">100,000</p>
+                <p id="text-top-right-dims">METERS</p>
+            </div>
+
+
+            <header id="titles" class="text-shadow">
+                <p id="power">POWERS OF TEN</p>
+                <p id="intro-1">An interactive experience dealing with the relative size of things in the Universe</p>
+                <p id="intro-2">And the effects of adding another zero</p>
+
+            </header>
+            <div id="begin-boxB">
+                BEGIN
+            </div>
+
+        </div>
+
+        <!-- <div class="box" id="box-default"></div> -->
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#button3").click(scene3)
+            $("#button4").click(scene4)
+            $("#button5").click(scene5)
+            $("#button6").click(scene6)
+            $("#button7").click(scene7)
+            $("#button8").click(scene8)
+            $("#button9").click(scene9)
+            $("#button10").click(scene10)
+
+
+            function scene3() {
+
+                scaleBoxDown('#box2', 100, 100, .4)
+                scaleBoxDown('#box3', 500, 500, 1)
+            }
+
+            function scene4() {
+                scaleBoxDown('#box2', 0, 0, 0)
+                scaleBoxDown('#box3', 100, 100, .4)
+                scaleBoxDown('#box4', 500, 500, 1)
+
+            }
+
+            function scene5() {
+                scaleBoxDown('#box3', 0, 0, 0)
+                scaleBoxDown('#box4', 100, 100, .4)
+                scaleBoxDown('#box5', 500, 500, 1)
+
+            }
+
+            function scene6() {
+                scaleBoxDown('#box4', 0, 0, 0)
+                scaleBoxDown('#box5', 100, 100, .4)
+                scaleBoxDown('#box6', 500, 500, 1)
+
+            }
+
+            function scene7() {
+                scaleBoxDown('#box7', 0, 0, 0)
+                scaleBoxDown('#box8', 100, 100, .4)
+                scaleBoxDown('#box9', 500, 500, 1)
+
+            }
+
+            function scene8() {
+                scaleBoxDown('#box8', 0, 0, 0)
+                scaleBoxDown('#box9', 100, 100, .4)
+                scaleBoxDown('#box10', 500, 500, 1)
+
+            }
+
+            function scene9() {
+                scaleBoxDown('#box9', 0, 0, 0)
+                scaleBoxDown('#box10', 100, 100, .4)
+                    // scaleBoxDown('#box9', 500, 500, .4)
+
+            }
+
+            function scene10() {
+                scaleBoxDown('#box10', 0, 0, 0)
+                    // scaleBoxDown('#box10', 100, 100, .4)
+                    // scaleBoxDown('#box9', 500, 500, .4)
+
+            }
+
+            function scaleBoxDown(thing, width, height, newopac) {
+                var boxcenterX = ($(window).width() / 2) - $(thing).width();
+                var boxcenterY = ($(window).height() / 2) - $(thing).height();
+
+
+                $(thing).animate({
+                    width: width,
+                    height: height,
+                    left: ($(window).width() / 2) - (width / 2),
+                    top: ($(window).height() / 2) - (height / 2),
+                    opacity: newopac
+                }, {
+                    duration: 5000,
+                    step: function(now, fx) {
+                        // console.log($(thing).width())
+                    }
+                });
+
+            }
+
+
+
+
+
+            function centerBoxDivs(thing) {
+
+                var boxcenterX = ($(window).width() / 2) - $(thing).width() / 2;
+                var boxcenterY = ($(window).height() / 2) - $(thing).width() / 2;
+                $(thing).css({
+                    "left": boxcenterX
+                });
+                $(thing).css({
+                    "top": boxcenterY
+                });
+
+            };
+
+
+
+            $(window).load(function() {
+                centerBoxDivs("#box1");
+                centerBoxDivs("#box2");
+                centerBoxDivs("#box3");
+                centerBoxDivs("#box4");
+                centerBoxDivs("#box5");
+                centerBoxDivs("#box6");
+                centerBoxDivs("#box7");
+                centerBoxDivs("#box8");
+                centerBoxDivs("#box9");
+                centerBoxDivs("#box10");
+
+            });
+            $(window).resize(function() {
+                centerBoxDivs("#box1");
+                centerBoxDivs("#box2");
+                centerBoxDivs("#box3");
+                centerBoxDivs("#box4");
+                centerBoxDivs("#box5");
+                centerBoxDivs("#box6");
+                centerBoxDivs("#box7");
+                centerBoxDivs("#box8");
+                centerBoxDivs("#box9");
+                centerBoxDivs("#box10");
+            });
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>
