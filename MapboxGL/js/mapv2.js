@@ -62,49 +62,9 @@ $(document).ready(function() {
 
     map.on('load', function() {
         TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
-        TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
-        TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
+        TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 1,onStart: secondZoom})
+        TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 1,onStart: thirdZoom})
 
-        // geojson.features.forEach(function(marker,i) {
-        //   console.log(marker)
-        //     // create a DOM element for the marker
-        //     var el = document.createElement('div');
-        //     el.className = 'marker';
-        //     el.style.backgroundImage = 'url(images/marker_' + i+'.png';
-        //     el.style.width = marker.properties.iconSize[0] + 'px';
-        //     el.style.height = marker.properties.iconSize[1] + 'px';
-        //
-        //     el.addEventListener('click', function() {
-        //         window.alert(marker.properties.message);
-        //     });
-        //
-        //     // add marker to map
-        //     new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
-        //         .setLngLat(marker.geometry.coordinates)
-        //         .addTo(map);
-        //     // new mapboxgl.DragRotateHandler(map: map,options:{pitchWithRotate :true}).addTo(map);
-        // });
-
-
-//         var index = supercluster({radius: 40, maxZoom: 16}).load(geojson.features);
-//
-// // get GeoJSON clusters given a bounding box and zoom
-// var clusters = index.getClusters([-180, -85, 180, 85], 2);
-//
-// // get a JSON vector tile in the same format as GeoJSON-VT
-// var tile = index.getTile(7, 523, 125);
-
-// map.addSource("geojson-marker",{
-//     "type": "geojson",
-//     // "data": "https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-//
-//     "data": {
-//
-//       //this is an inline geojson or it can be a URL
-//         "type": "Feature",
-//         "geometry": {
-//             "type": "Point",
-//             "coordinates": [centerLAT, centerLON]
 //         },
 //         "properties": {
 //             "title": "Mapbox DC",
@@ -325,19 +285,24 @@ $(document).ready(function() {
             el.style.width = marker.properties.iconSize[0] + 'px';
             el.style.height = marker.properties.iconSize[1] + 'px';
 
-            el.addEventListener('click', function() {
-              var popup = new mapboxgl.Popup()
-              .setLngLat(centerLON,centerLAT)
-              .setHTML(marker.properties.message)
-              .addTo(map)
-              // window.alert(marker.properties.message);
-            });
+            // el.addEventListener('click', function() {
+            //   var popup = new mapboxgl.Popup()
+            //   .setLngLat(centerLON,centerLAT)
+            //   .setHTML(marker.properties.message)
+            //   .addTo(map)
+            //   // window.alert(marker.properties.message);
+            // });
 
             scene3Markers.push(el)
+
+            // create the popup
+            var popup = new mapboxgl.Popup({offset:[0, -30]})
+                .setText('Construction on the Washington Monument began in 1848.');
 
             // add marker to map
             new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
                 .setLngLat(marker.geometry.coordinates)
+                .setPopup(popup) // sets a popup on this marker
                 .addTo(map);
         });
   }
