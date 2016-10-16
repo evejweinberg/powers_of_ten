@@ -16,4 +16,5 @@ var p5voice = true;
 var speaker;
 var scene1 = true
 var scene3Markers = []
+var debug = true
 //var tickingUp;

@@ -66,11 +66,13 @@ $(document).ready(function() {
 
 
     map.on('load', function() {
-        TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
-        TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
-        TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
+        TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: thirdZoom})
 
-loadSubway(map);
+        // TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
+        // TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
+        // TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
+
+  loadSubway(map);
 
 
 
@@ -436,13 +438,30 @@ loadSubway(map);
 
     }
 
+    function toWebMercatorY(latitude) {
+      var rad = latitude * 0.0174532;
+      var fsin = Math.sin(rad);
+
+      var y = 6378137 / 2.0 * Math.log((1.0 + fsin) / (1.0 - fsin));
+
+      return y;
+    }
+
+    function toWebMercatorX(longitude) {
+      var x = longitude * 0.017453292519943 * 6378137;
+
+      return x;
+    }
+
     function thirdZoom() {
       document.getElementById("text-top-right").innerHTML="1"
       // zoomVideo.currentTime = 6
       var zoomVideo = document.getElementById('zoom-video');
       // rewind(1)
+      if (debug=false){
       zoomVideo.play()
         $('#zoom-video').delay(1800).fadeIn(1500);
+      }
       // $('#house-image').delay(1000).addClass('house-scale-up2')
       // $("#house-image").delay(2000).fadeIn(200);
       $('#begin-boxB').delay(4000).fadeIn(1000)
@@ -450,19 +469,21 @@ loadSubway(map);
      $("#numbers-pow").delay(4000).fadeIn(1000)
     //  zoomVideo.setAttribute('src', 'images/zoom3.mp4');
 
+if (debug=false){
+
 
       setTimeout(function(){
         TweenMax.from("#studio-video", 2.6, {width:"1%", left:"50%",top:"40%",height:"1%", ease:Power2.easeInOut})
         $("#studio-video").fadeIn(400);
 }
 ,6000)
+      }
 
 
         // TweenMax.from("#house-image", 8, {width:"1%", left:"50%",top:"50%",height:"1%", ease:Power2.easeInOut});
 
-
         map.flyTo({
-            center: [-73.945360, 40.717533],
+            center: [centerLAT, centerLON],
             zoom: mapInitZoom + 9,
             speed: .4,
             curve: 1,
@@ -470,14 +491,92 @@ loadSubway(map);
 
         })
 
+        drawBoxFromPoints('10', generateBoxFromCenter(centerLAT, centerLON, 0, 10));
+        drawBoxFromPoints('100', generateBoxFromCenter(centerLAT, centerLON, 0, 100));
+        drawBoxFromPoints('1000', generateBoxFromCenter(centerLAT, centerLON, 0, 1000));
+
+        /* population */
+        var points84 = generateBoxFromCenter(centerLAT, centerLON, 0, 10000)
+        var pointsWebMercator = _.map(points84, function(ll) {
+          return [toWebMercatorX(ll[0]), toWebMercatorY(ll[1])]
+        })
+        var esriPolygon = {"geometryType":"esriGeometryPolygon","features":[{"geometry":{"rings": [pointsWebMercator],"spatialReference":{"wkid":102100,"latestWkid":3857}}}],"sr":{"wkid":102100,"latestWkid":3857}}
+        console.log(JSON.stringify(esriPolygon, null, 0));
+
+        var request = $.ajax({
+          url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/GPServer/PopulationSummary/execute',
+          data: {
+            f: 'json',
+            inputPoly: JSON.stringify(esriPolygon, null, 0),
+            'env:outSR': '',
+            'env:processSR': ''
+          },
+          dataType: "jsonp",
+          method: 'GET'
+        })
+
+        request.done(function(response) {
+          console.log(response)
+          console.log(response['results'][0]['value']['features'][0]['attributes']['SUM'])
+        });
     }
 
 
+    function drawBoxFromPoints(idSuffix, points) {
+      var sourceName = "box" + idSuffix;
 
+      map.addSource(sourceName, {
+          "type": "geojson",
+          "data": {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    points
+                  ]
+                }
+              }
+            ]
+          }
+      });
 
+      map.addLayer({
+          "id": "idbox" + idSuffix,
+          "type": "line",
+          "source": sourceName,
+          "layout": {
+              "line-join": "round",
+              "line-cap": "round"
+          },
+          "paint": {
+              "line-color": "#888",
+              "line-width": 8
+          }
+      });
+    }
 
+    function generateBoxFromCenter(lat, lng, initialBearing, distance) {
+      var polygon = LGeo.square([lng, lat], distance);
+      console.log(polygon);
+      var lls = polygon.getLatLngs()
+      lls.push(lls[0])
+      return _.map(lls, function(ll) {
+        return [ll.lng, ll.lat];
+      });
 
+      // console.log(LGeo.squarePoints([lat, lng], distance, initialBearing))
+      // return LGeo.squarePoints([lat, lng], distance, initialBearing)
 
+      // return _.times(5, function(iteration) {
+      //   var currentBearing = initialBearing + (90 * iteration)
+      //   console.log(currentBearing);
+      //   return destVincenty(lat, lng, currentBearing, distance)
+      // })
+    }
 
 ////audio
 
