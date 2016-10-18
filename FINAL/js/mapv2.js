@@ -66,11 +66,15 @@ $(document).ready(function() {
 
 
     map.on('load', function() {
-        TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: thirdZoom})
+      if (debug == true){
 
-        // TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
-        // TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
-        // TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
+        TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: thirdZoom})
+      } else {
+        TweenLite.fromTo(power, 2, {opacity: 0,y: 200,x: -120}, {opacity: 100,y: -160,x: -120,ease: Expo.easeOut,onStart: firstZoom})
+        TweenLite.fromTo(intro1, 4, {x: -220,opacity: 0,y: -60}, {y: -160,opacity: 100,x: -220,ease: Expo.easeOut,delay: 4,onStart: secondZoom})
+        TweenLite.fromTo(intro2, 4, {x: -220,opacity: 0,y: -100}, {y: -160,opacity: 100,x: -220,ease: Power4.easeOut,delay: 7,onStart: thirdZoom})
+      }
+
 
   loadSubway(map);
 
@@ -141,7 +145,6 @@ $(document).ready(function() {
     // $("#house-image").delay(4200).fadeOut(1000);
 
     if (p5voice){
-
       speaker.speak(text2)
     } else {
       responsiveVoice.speak(text2.toString(),"US English Female");
@@ -160,11 +163,11 @@ $(document).ready(function() {
         duration: scene1duration,
         easing: 'swing',
         step: function() {
-          if (currentMeter<100){
-
-            // document.getElementById("text-top-right").innerHTML=currentMeter
-            currentMeter++
-          }
+          // if (currentMeter<100){
+          //
+          //   // document.getElementById("text-top-right").innerHTML=currentMeter
+          //   currentMeter++
+          // }
         }
     });
 
@@ -302,8 +305,8 @@ $(document).ready(function() {
         bearing: 30
         })
 
-
-        map.setLayoutProperty("sub_points", 'visibility', 'visible');
+    //subway points
+    map.setLayoutProperty("sub_points", 'visibility', 'visible');
 
 
 
@@ -438,20 +441,20 @@ $(document).ready(function() {
 
     }
 
-    function toWebMercatorY(latitude) {
-      var rad = latitude * 0.0174532;
-      var fsin = Math.sin(rad);
-
-      var y = 6378137 / 2.0 * Math.log((1.0 + fsin) / (1.0 - fsin));
-
-      return y;
-    }
-
-    function toWebMercatorX(longitude) {
-      var x = longitude * 0.017453292519943 * 6378137;
-
-      return x;
-    }
+    // function toWebMercatorY(latitude) {
+    //   var rad = latitude * 0.0174532;
+    //   var fsin = Math.sin(rad);
+    //
+    //   var y = 6378137 / 2.0 * Math.log((1.0 + fsin) / (1.0 - fsin));
+    //
+    //   return y;
+    // }
+    //
+    // function toWebMercatorX(longitude) {
+    //   var x = longitude * 0.017453292519943 * 6378137;
+    //
+    //   return x;
+    // }
 
     function thirdZoom() {
       document.getElementById("text-top-right").innerHTML="1"
@@ -464,14 +467,12 @@ $(document).ready(function() {
       }
       // $('#house-image').delay(1000).addClass('house-scale-up2')
       // $("#house-image").delay(2000).fadeIn(200);
-      $('#begin-boxB').delay(4000).fadeIn(1000)
+     $('#begin-boxB').delay(4000).fadeIn(1000)
      $('#text-tr-box').delay(4000).fadeIn(1000)
      $("#numbers-pow").delay(4000).fadeIn(1000)
     //  zoomVideo.setAttribute('src', 'images/zoom3.mp4');
 
 if (debug=false){
-
-
       setTimeout(function(){
         TweenMax.from("#studio-video", 2.6, {width:"1%", left:"50%",top:"40%",height:"1%", ease:Power2.easeInOut})
         $("#studio-video").fadeIn(400);
@@ -494,6 +495,8 @@ if (debug=false){
         drawBoxFromPoints('10', generateBoxFromCenter(centerLAT, centerLON, 0, 10));
         drawBoxFromPoints('100', generateBoxFromCenter(centerLAT, centerLON, 0, 100));
         drawBoxFromPoints('1000', generateBoxFromCenter(centerLAT, centerLON, 0, 1000));
+        drawBoxFromPoints('10000', generateBoxFromCenter(centerLAT, centerLON, 0, 10000));
+        drawBoxFromPoints('100000', generateBoxFromCenter(centerLAT, centerLON, 0, 100000));
 
         /* population */
         var points84 = generateBoxFromCenter(centerLAT, centerLON, 0, 10000)
@@ -553,8 +556,8 @@ if (debug=false){
               "line-cap": "round"
           },
           "paint": {
-              "line-color": "#888",
-              "line-width": 8
+              "line-color": "#fff",
+              "line-width": 2
           }
       });
     }
